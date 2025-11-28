@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Date & Time Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef1f5;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header */
+        header {
+            background: #2d89ef;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 140px);
+            padding: 20px;
+        }
+
+        .datetime-box {
+            background: white;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        .time {
+            font-size: 50px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .date, .day {
+            font-size: 24px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d89ef;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 18px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Header -->
+    <header>Live Time, Date & Day Website</header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="datetime-box">
+            <div class="time" id="time">00:00:00</div>
+            <div class="date" id="date">Loading...</div>
+            <div class="day" id="day">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2025 | All Rights Reserved | Made by You</footer>
+
+    <!-- JavaScript -->
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+
+            // Time
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            hours = (hours < 10 ? "0" : "") + hours;
+            minutes = (minutes < 10 ? "0" : "") + minutes;
+            seconds = (seconds < 10 ? "0" : "") + seconds;
+
+            document.getElementById("time").innerHTML = `${hours}:${minutes}:${seconds}`;
+
+            // Date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("date").innerHTML = now.toLocaleDateString("en-IN", options);
+
+            // Day
+            const dayName = now.toLocaleDateString("en-IN", { weekday: 'long' });
+            document.getElementById("day").innerHTML = dayName;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+
+</body>
+</html>
